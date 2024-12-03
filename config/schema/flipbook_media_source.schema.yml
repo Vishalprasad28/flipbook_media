@@ -1,0 +1,3 @@
+media.source.flipbook:
+  type: media.source.field_aware
+  label: '"FlipBook" media source configuration'

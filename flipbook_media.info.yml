@@ -1,0 +1,8 @@
+name: 'Flipbook Media Source'
+type: module
+description: 'Adds the Flipbook Media Source Option.'
+package: Custom
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:media
+  - drupal:media_library
