@@ -21,42 +21,11 @@ class FlipBookMediaFormatter extends FlipBookMediaFormatterBase {
   /**
    * {@inheritdoc}
    */
-  public static function getUrlRegexPattern() {
-    return '/^https:\/\/insights\.ltts\.com\/story\/.*$/';
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getValidUrlExampleStrings(): array {
-    return [
-      'https://insights.ltts.com/story/industrial-products-service-portfolio/',
-    ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public static function defaultSettings() {
     return [
-        'action_text' => '',
-      ] + parent::defaultSettings();
-  }
-
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function deriveMediaDefaultNameFromUrl($url) {
-    $matches = [];
-    $pattern = static::getUrlRegexPattern();
-    preg_match_all($pattern, $url, $matches);
-    if (!empty($matches[1][0])) {
-      return self::t('FlipBook from @url', [
-        '@url' => $url,
-      ]);
-    }
-    return parent::deriveMediaDefaultNameFromUrl($url);
+      'action_text' => '',
+      'default_turtl_id' => '',
+    ] + parent::defaultSettings();
   }
 
   /**
@@ -69,16 +38,12 @@ class FlipBookMediaFormatter extends FlipBookMediaFormatterBase {
       if ($item->isEmpty()) {
         continue;
       }
-      $matches = [];
-      $pattern = static::getUrlRegexPattern();
-      preg_match_all($pattern, $item->value, $matches);
-      if (empty($matches[1][0])) {
-        continue;
-      }
+
       $elements[$delta] = [
         '#theme' => 'media_flipbook',
-        '#url' => $matches[1][0],
+        '#url' => $item->value,
         '#action_text' => $this->getSetting('action_text'),
+        '#default_turtl_id' => $this->getSetting('default_turtl_id'),
       ];
     }
     return $elements;
@@ -89,12 +54,17 @@ class FlipBookMediaFormatter extends FlipBookMediaFormatterBase {
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     return parent::settingsForm($form, $form_state) + [
-        'action_text' => [
-          '#type' => 'textfield',
-          '#title' => $this->t('Action Text'),
-          '#default_value' => $this->getSetting('action_text'),
-        ],
-      ];
+      'action_text' => [
+        '#type' => 'textfield',
+        '#title' => $this->t('Action Text'),
+        '#default_value' => $this->getSetting('action_text'),
+      ],
+      'default_turtl_id' => [
+        '#type' => 'textfield',
+        '#title' => $this->t('Action Text'),
+        '#default_value' => $this->getSetting('default_turtl_id'),
+      ],
+    ];
   }
 
   /**
@@ -104,6 +74,9 @@ class FlipBookMediaFormatter extends FlipBookMediaFormatterBase {
     $summary = parent::settingsSummary();
     $summary[] = $this->t('Action text: %action_text', [
       '%action_text' => $this->getSetting('action_text'),
+    ]);
+    $summary[] = $this->t('Default Turtl Id: %default_turtl_id', [
+      '%default_turtl_id' => $this->getSetting('default_turtl_id'),
     ]);
     return $summary;
   }

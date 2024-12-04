@@ -4,15 +4,13 @@ namespace Drupal\flipbook_media\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FormatterBase;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\flipbook_media\Plugin\media\Source\FlipBook;
-use Drupal\flipbook_media\FlipBookMediaFormatterInterface;
 use Drupal\media\Entity\MediaType;
 
 /**
  * Base class for FlipBook Media formatters.
  */
-abstract class FlipBookMediaFormatterBase extends FormatterBase implements FlipBookMediaFormatterInterface {
+abstract class FlipBookMediaFormatterBase extends FormatterBase {
 
   /**
    * {@inheritdoc}
@@ -43,13 +41,6 @@ abstract class FlipBookMediaFormatterBase extends FormatterBase implements FlipB
       }
     }
     return FALSE;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function deriveMediaDefaultNameFromUrl($url) {
-    return t('Flipbook for @url', ['@url' => $url]);
   }
 
 }

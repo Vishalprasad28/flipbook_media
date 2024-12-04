@@ -1,1 +1,11 @@
-{{ turtl_id }}
+<div class="turtl-embed-panel">
+  <a class="turtl-embed" target="_blank" data-turtl-embed-type="animation" data-turtl-link-text="{{ action_text|t }}"
+  data-turtl-width="340" data-turtl-display-mode="lightbox" data-turtl-animation-mode="hover"
+  data-turtl-color="#1eb1c7" data-turtl-story-id="{{ default_turtl_id }}"
+  href="{{ url }}"
+  title="{{ name }}">{{ action_text|t }}</a>
+  <script async type="text/javascript" data-turtl-script="embed"
+  data-turtl-assets-hostname="https://assets.turtl.co"
+  src="https://app-static.turtl.co/embed/turtl.embed.v1.js"></script>
+</div> 
+

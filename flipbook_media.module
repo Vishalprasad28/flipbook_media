@@ -14,6 +14,7 @@ function flipbook_media_theme($existing, $type, $theme, $path) {
       'variables' => [
         'url' => NULL,
         'action_text' => NULL,
+        'default_turtl_id' => NULL,
       ],
     ],
   ];
